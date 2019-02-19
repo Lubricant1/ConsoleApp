@@ -25,8 +25,8 @@ public class ApplicationController implements Controller {
                 }
             })
             .filter(Objects::nonNull)
-            .map(stringIntegerSimpleEntry -> new ResultEntity(stringIntegerSimpleEntry.getValue(),
-                stringIntegerSimpleEntry.getKey()))
+            .map(stringIntegerSimpleEntry ->
+                new ResultEntity(stringIntegerSimpleEntry.getValue(), stringIntegerSimpleEntry.getKey()))
             .collect(Collectors.toList());
         executor.shutdown();
         return resultList;

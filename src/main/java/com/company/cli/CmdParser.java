@@ -9,12 +9,12 @@ public class CmdParser {
     private Options options;
     private HelpFormatter helpFormatter;
     private CommandLineParser parser;
-    private static CmdParser instance;
+    private static CmdParser INSTANCE;
 
     public static CmdParser getInstance() {
-        if (instance == null)
-            instance = new CmdParser();
-        return instance;
+        if (INSTANCE == null)
+            INSTANCE = new CmdParser();
+        return INSTANCE;
     }
 
     private CmdParser() {

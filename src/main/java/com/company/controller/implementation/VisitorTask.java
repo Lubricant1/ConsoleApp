@@ -16,6 +16,7 @@ public class VisitorTask implements Callable<AbstractMap.SimpleEntry<String, Int
         visitor = new FileCountVisitor();
     }
 
+    @Override
     public AbstractMap.SimpleEntry<String, Integer> call() throws Exception {
         Path path = Paths.get(sourceFolderPath);
         Files.walkFileTree(path, visitor);

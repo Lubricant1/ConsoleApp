@@ -26,9 +26,8 @@ public final class FileUtils {
 
     public static void saveCsvFile(String destination, List<ResultEntity> resultList) {
         try (PrintWriter writer = new PrintWriter(Files.newBufferedWriter(Paths.get(destination)))) {
-            for (ResultEntity result : resultList) {
-                writer.println(result.getSourceFolderPath() + ";" + result.getSubitemsCount());
-            }
+            resultList.forEach(resultEntity ->
+                writer.println(resultEntity.getSourceFolderPath() + ";" + resultEntity.getSubitemsCount()));
             writer.flush();
         } catch (IOException e) {
             e.printStackTrace();

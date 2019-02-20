@@ -14,8 +14,8 @@ public class ApplicationController implements Controller {
     @Override
     public List<ResultEntity> scanFoldersList(List<String> pathsList) throws InterruptedException {
         ExecutorService executor = Executors.newCachedThreadPool();
-        List<ResultEntity> resultList = executor.invokeAll(pathsList.stream()
-            .map(VisitorTask::new).collect(Collectors.toList())).stream()
+        List<ResultEntity> resultList = executor.invokeAll(prepareTasks(pathsList))
+            .stream()
             .map(simpleEntryFuture -> {
                 try {
                     return simpleEntryFuture.get();
@@ -30,5 +30,9 @@ public class ApplicationController implements Controller {
             .collect(Collectors.toList());
         executor.shutdown();
         return resultList;
+    }
+
+    private List<VisitorTask> prepareTasks(List<String> pathsList) {
+        return pathsList.stream().map(VisitorTask::new).collect(Collectors.toList());
     }
 }
